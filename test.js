@@ -1,6 +1,7 @@
 const assert = require('assert');
 const sumOfOther = require('./src/sumOfOther');
 const make = require('./src/make');
+const recursion = require('./src/recursion');
 
 describe('tests for sumOfOther', () => {
   it('1 test', () => {
@@ -46,5 +47,42 @@ describe('tests for make', () => {
   });
   it('power test', () => {
     assert.deepEqual(make(2)(2)(3, 1)(power), 64);
+  });
+});
+describe('tests for recursion', () => {
+  const tree = {
+    value: 100,
+    left: {
+      value: 90,
+      left: { value: 70 },
+      right: { value: 99 },
+    },
+    right: {
+      value: 120,
+      left: { value: 110 },
+      right: { value: 130 },
+    },
+  };
+  const myTree = {
+    value: 100,
+    left: {
+      value: 90,
+      left: {
+        value: 70,
+        left: { value: 50 },
+        right: { value: 80 },
+      },
+      right: { value: 99 },
+    },
+    right: {
+      value: 120,
+      right: { value: 130 },
+    },
+  };
+  it('recursion test 1', () => {
+    assert.deepEqual(recursion(tree), [100, [90, 120], [70, 99, 110, 130]]);
+  });
+  it('recursion test 2', () => {
+    assert.deepEqual(recursion(myTree), [100, [90, 120], [70, 99, 130], [50, 80]]);
   });
 });
